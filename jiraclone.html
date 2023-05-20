@@ -4,7 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>To do App</title>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body></body>
+  <body>
+    <!-- navbar -->
+    <div id="navbar">
+      <div id="priorities">
+        <div class="lightpink cursor-pointer"></div>
+        <div class="lightgreen cursor-pointer"></div>
+        <div class="lightblue cursor-pointer"></div>
+        <div class="black cursor-pointer"></div>
+      </div>
+      <div id="symbols">
+        <div class="cursor-pointer">+</div>
+        <div class="cursor-pointer">X</div>
+      </div>
+    </div>
+
+    <!-- text area  -->
+    <div class="todo">
+      <textarea
+        class="writing-area"
+        placeholder="Please Enter Your Text Here"
+      ></textarea>
+      <div class="priority-setter">
+        <div class="lightpink"></div>
+        <div class="lightblue"></div>
+        <div class="lightgreen"></div>
+        <div class="black"></div>
+      </div>
+    </div>
+  </body>
 </html>

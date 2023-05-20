@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* pointer cursor */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* navbar starts */
+#navbar {
+  display: flex;
+  background-color: #4b4b4b;
+  height: 5rem;
+  align-items: center;
+}
+
+#navbar > * {
+  margin-left: 4rem;
+}
+
+#priorities {
+  background-color: #3d3d3d;
+  display: flex;
+  width: 18rem;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 70%;
+  padding: 25px;
+}
+
+#priorities > div {
+  width: 3rem;
+  height: 1.5rem;
+}
+
+#symbols {
+  background-color: #3d3d3d;
+  display: flex;
+  height: 70%;
+  width: 9rem;
+  justify-content: space-evenly;
+  align-items: center;
+}
+/* navbar ends */
+
+/* colors class starts */
+.lightpink {
+  background-color: pink;
+}
+.lightgreen {
+  background-color: green;
+}
+.lightblue {
+  background-color: blue;
+}
+.black {
+  background-color: black;
+}
+/* colors class ends */
+
+/* popup starts */
+.todo {
+  display: flex;
+  height: 50vh;
+  width: 45vw;
+  position: absolute;
+  top: calc((100vh - 50vh) / 2);
+  left: calc((100vw - 45vw) / 2);
+}
+
+/* writing area starts */
+.writing-area {
+  background-color: lightgray;
+  width: 75%;
+  height: 100%;
+  padding: auto;
+  font-size: 2.5rem;
+  border: none;
+  resize: none;
+  outline: none;
+}
+/* writing area ends */
+
+/* priority setter */
+.priority-setter {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 100%;
+  background-color: #4b4b4b;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.priority-setter > div {
+  /* align-items: space-between; */
+  width: 45%;
+  height: 13%;
+}
+
+/* priority setter ends */
