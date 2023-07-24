@@ -152,3 +152,8 @@
 }
 
 /* end */
+
+/* remove btn add active class */
+.red {
+  color: red !important;
+}

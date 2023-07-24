@@ -12,6 +12,8 @@ const mainCont = document.querySelector('.main-cont');
 const allPriorityColors = document.querySelectorAll('.priority-color');
 const priorityGetter = document.querySelectorAll('#priorities>*');
 let ticketArr = [];
+let isRemoveBtnActive = false;
+const removeBtn = document.querySelector('.remove-btn');
 
 addBtn.addEventListener('click', function (e) {
   // toggle modal display
@@ -25,7 +27,6 @@ addBtn.addEventListener('click', function (e) {
 
 const modalWritePart = document.querySelector('.writing-area');
 modalWritePart.addEventListener('keydown', function (e) {
-  // console.log(e);
   if (e.key == 'Shift') {
     //create ticket
     //toggle display and hide model
@@ -34,6 +35,12 @@ modalWritePart.addEventListener('keydown', function (e) {
     isModalPresent = false;
     textArea.value = ''
     modalPriorityColor = 'black';
+
+    // removing active class from all colors
+    allPriorityColors.forEach(color_el => {
+      color_el.classList.remove('active');
+    })
+    allPriorityColors[allPriorityColors.length - 1].classList.add('active');
   }
 })
 
@@ -57,6 +64,7 @@ function createTicket(ticketColor, id, text, isNewTicket) {
   // if (arr.find((ticket) => ticket.id == id)) {
   //   return;
   // }
+  handleRemoval(ticketContainer, id);
   if (!isNewTicket) {
     return;
   }
@@ -83,14 +91,20 @@ allPriorityColors.forEach(color_el => {
 
 // getting tickets on basis of ticket color
 priorityGetter.forEach((priority_color) => {
+
+  // on single click show only that particular priority color
   priority_color.addEventListener('click', function (e) {
+    // first remove all the tickets from dom
     const allTickets = document.querySelectorAll(".main-cont>*");
     allTickets.forEach((ticket) => ticket.remove());
     const currColor = priority_color.classList[0];
     let filteredArr = ticketArr?.filter((ticket) => ticket.color == currColor);
     filteredArr.forEach(ticket => createTicket(ticket.color, ticket.id, ticket.text))
   })
+
+  // on double click show all the tickets
   priority_color.addEventListener('dblclick', function () {
+    // remove tickets from ui first 
     const allTickets = document.querySelectorAll(".main-cont>*");
     allTickets.forEach((ticket) => ticket.remove());
     ticketArr.forEach((ticket) => createTicket(ticket.color, ticket.id, ticket.text));
@@ -103,3 +117,28 @@ if (localStorage.getItem('tickets')) {
   ticketArr = JSON.parse(localStorage.getItem('tickets'));
   ticketArr.forEach((ticket) => createTicket(ticket.color, ticket.id, ticket.text));
 }
+
+
+
+removeBtn.addEventListener('click', function () {
+  // if remove btn is not active then make it active
+  const remove_icon = document.querySelector('.fa-xmark');
+  if (!isRemoveBtnActive) {
+    remove_icon.classList.add('red')
+  } else {
+    // make it inactive
+    remove_icon.classList.remove('red');
+  }
+  isRemoveBtnActive = !isRemoveBtnActive;
+})
+
+function handleRemoval(ticketCont, id) {
+  ticketCont.addEventListener('click', function () {
+    if (!isRemoveBtnActive) return;
+    const idx = ticketArr.findIndex((ticket) => ticket.id == id);
+    ticketArr.splice(idx, 1);
+    localStorage.setItem('tickets', JSON.stringify(ticketArr));
+    ticketCont.remove();
+  })
+}
+
