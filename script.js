@@ -11,6 +11,7 @@ let modalPriorityColor = colors[colors.length - 1];
 const mainCont = document.querySelector('.main-cont');
 const allPriorityColors = document.querySelectorAll('.priority-color');
 const priorityGetter = document.querySelectorAll('#priorities>*');
+console.log(priorityGetter);
 let ticketArr = [];
 let isRemoveBtnActive = false;
 const removeBtn = document.querySelector('.remove-btn');
@@ -66,6 +67,7 @@ function createTicket(ticketColor, id, text, isNewTicket) {
   // }
   handleRemoval(ticketContainer, id);
   handlePriorityColor(ticketContainer, id);
+  handleLock(ticketContainer, id);
   if (!isNewTicket) {
     return;
   }
@@ -154,7 +156,7 @@ function getTicketIdx(id) {
 function handlePriorityColor(ticketCont, id) {
   let ticketColor = ticketCont.querySelector(".ticket-color");
 
-  //add event listener of type click on  ticketColor
+  //add evenyt listener of type click on  ticketColor
   ticketColor.addEventListener("click", function () {
     let currTicketColor = ticketColor.classList[1]; //lightpink
     let currTicketColorIdx = colors.indexOf(currTicketColor); //0
@@ -172,4 +174,41 @@ function handlePriorityColor(ticketCont, id) {
     localStorage.setItem("tickets", JSON.stringify(ticketArr));
   });
 }
+
+
+const unlock = "fa-lock-open";
+const lock = "fa-lock"
+function handleLock(ticketCont, id) {
+  const ticketLock = ticketCont.querySelector(".ticket-lock");
+  let ticketTaskArea = ticketCont.querySelector(".task-area");
+  ticketLock.addEventListener('click', function () {
+    if (ticketLock.children[0].classList.contains(lock)) {
+      ticketLock.children[0].classList.remove(lock);
+      ticketLock.children[0].classList.add(unlock);
+
+      // make content editable
+      ticketTaskArea.setAttribute("contenteditable", true);
+    } else {
+      ticketLock.children[0].classList.remove(unlock);
+      ticketLock.children[0].classList.add(lock);
+
+      // make content non-editable
+      ticketTaskArea.setAttribute("contenteditable", false);
+
+      let idx = getTicketIdx(id);
+      ticketArr[idx].text = ticketTaskArea.textContent;
+      localStorage.setItem('tickets', JSON.stringify(ticketArr));
+    }
+  })
+
+}
+
+priorityGetter.forEach((priority_color) => {
+  priority_color.addEventListener('mouseover', () => {
+    priorityGetter.forEach((priority_color) => {
+      priority_color.classList.remove('active');
+    })
+    priority_color.classList.add('active');
+  })
+})
 
