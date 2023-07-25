@@ -11,7 +11,6 @@ let modalPriorityColor = colors[colors.length - 1];
 const mainCont = document.querySelector('.main-cont');
 const allPriorityColors = document.querySelectorAll('.priority-color');
 const priorityGetter = document.querySelectorAll('#priorities>*');
-console.log(priorityGetter);
 let ticketArr = [];
 let isRemoveBtnActive = false;
 const removeBtn = document.querySelector('.remove-btn');
@@ -168,7 +167,6 @@ function handlePriorityColor(ticketCont, id) {
     //update local storage
     let idx = getTicketIdx(id);
     //update the newticketcolor in ticketArr
-    console.log(ticketArr, idx)
     ticketArr[idx].color = newTicketColor;
     //set in local storage
     localStorage.setItem("tickets", JSON.stringify(ticketArr));
